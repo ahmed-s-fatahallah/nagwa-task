@@ -1,9 +1,18 @@
+//  DEPENDANCIES IMPORTS
 import { Application } from "express";
 
-const rankRoute = (app: Application) => {
+//  DATA FILE IMPORT
+import data from "./../assets/TestData.json";
+
+/**
+ * this is the rank routes handler function
+ * @param app express application object
+ */
+const rankRoutes = (app: Application) => {
   app.get("/rank", (req, res) => {
     res.send("rank route");
   });
 };
 
-export default rankRoute;
+//  EXPORTS STATMENTS
+export default rankRoutes;

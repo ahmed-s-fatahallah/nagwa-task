@@ -44,12 +44,12 @@ const generateRndWordsArry = (_req: Request, res: Response) => {
 };
 
 /**
- * this is the words route handler function
+ * this is the words routes handler function
  * @param app express application object
  */
-const wordsRoute = (app: Application) => {
+const wordsRoutes = (app: Application) => {
   app.get("/words", generateRndWordsArry);
 };
 
 //  EXPORTS STATMENTS
-export default wordsRoute;
+export default wordsRoutes;

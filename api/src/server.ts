@@ -4,8 +4,8 @@ import cors from "cors";
 import bodyParser from "body-parser";
 
 //  ROUTES IMPORTS
-import words from "./routes/words";
-import rank from "./routes/rank";
+import wordsRoutes from "./routes/words";
+import rankRoutes from "./routes/rank";
 
 const app = express();
 
@@ -22,5 +22,5 @@ app.get("/", (req, res) => {
   res.send("hello, this is ahmed's server for Nagwa task");
 });
 
-words(app);
-rank(app);
+wordsRoutes(app);
+rankRoutes(app);
