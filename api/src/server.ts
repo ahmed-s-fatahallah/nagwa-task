@@ -1,6 +1,11 @@
+//  DEPENDANCIES IMPORTS
 import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
+
+//  ROUTES IMPORTS
+import words from "./routes/words";
+import rank from "./routes/rank";
 
 const app = express();
 
@@ -16,3 +21,6 @@ app.listen(port, () => {
 app.get("/", (req, res) => {
   res.send("hello, this is ahmed's server for Nagwa task");
 });
+
+words(app);
+rank(app);
