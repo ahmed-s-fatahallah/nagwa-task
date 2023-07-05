@@ -27,15 +27,14 @@ const generateRndWordsArry = (_req: Request, res: Response) => {
     // generate a random word from data word list
     const randomWord = randomWordGenerator(data.wordList);
 
-    if (wordsArry.length < 4) {
-      // loop inside the posArry to make sure that the final arary contains all 4 pos words
-      posArry.forEach((el, i) => {
-        if (randomWord.pos === el) {
-          posArry.splice(i, 1);
-          wordsArry.push(randomWord);
-        }
-      });
-    } else {
+    // loop inside the posArry to make sure that the final arary contains all 4 pos words
+    posArry.forEach((el, i) => {
+      if (randomWord.pos === el) {
+        posArry.splice(i, 1);
+        wordsArry.push(randomWord);
+      }
+    });
+    if (wordsArry.length >= 4) {
       wordsArry.push(randomWord);
     }
   }
