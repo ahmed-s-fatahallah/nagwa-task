@@ -1,0 +1,6 @@
+.main-header {
+  text-align: center;
+  padding: 1rem;
+
+  border-bottom: 1px solid var(--color-white-300);
+}

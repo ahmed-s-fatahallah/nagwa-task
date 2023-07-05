@@ -1,0 +1,21 @@
+.footer {
+  margin-top: 1px solid var(--color-white-300);
+  padding: 2rem;
+}
+
+.footer__container {
+  width: 44.6666667%;
+  margin: 0 auto;
+  padding: 1rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 2rem;
+}
+
+.footer__container p {
+  font-size: 1.6rem;
+  color: var(--color-grey-300);
+}
