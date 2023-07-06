@@ -1,0 +1,49 @@
+.activity-section {
+  padding: 5rem;
+  border: 1px solid var(--color-white-300);
+  border-radius: 4px;
+
+  width: 60%;
+}
+.activity-section .word {
+  text-align: center;
+  font-size: 2.4rem;
+  color: var(--color-blue-300);
+  font-weight: 700;
+  font-family: sans-serif;
+}
+
+.btns-container {
+  display: flex;
+  align-items: center;
+  gap: 4rem;
+
+  margin-top: 5rem;
+}
+
+.prog-container {
+  margin-top: 5rem;
+}
+
+.score-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 1.4rem;
+  font-weight: 400;
+  margin-bottom: 0.5rem;
+}
+
+.prog-bar-container {
+  width: 100%;
+  background-color: var(--color-white-300);
+  height: 0.5rem;
+  border-radius: 4px;
+}
+
+.prog-bar {
+  background-color: var(--color-blue-300);
+  width: 50%;
+  height: 100%;
+  border-radius: 4px;
+}

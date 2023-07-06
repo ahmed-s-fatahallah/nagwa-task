@@ -1,21 +1,18 @@
 .footer {
-  margin-top: 1px solid var(--color-white-300);
-  padding: 2rem;
+  border-top: 1px solid var(--color-white-300);
+  padding: 2rem 0;
+  margin-top: 10rem;
 }
 
 .footer__container {
-  width: 44.6666667%;
-  margin: 0 auto;
-  padding: 1rem;
+  padding: 1rem 0;
 
   display: flex;
   align-items: center;
   justify-content: space-between;
-
-  gap: 2rem;
 }
 
 .footer__container p {
   font-size: 1.6rem;
-  color: var(--color-grey-300);
+  width: 44.6666666667%;
 }
