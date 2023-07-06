@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import MainBtn from "../MainBtn/MainBtn";
 
 import classes from "./Activity.module.css";
@@ -18,6 +18,9 @@ const Activity = ({
   const [wordNum, setWordNum] = useState(0);
   const [score, setScore] = useState(0);
   const [isEnded, setIsEnded] = useState(false);
+  const [btnListClasses, setBtnListClasses] = useState(
+    `${classes["btns-container"]}`
+  );
 
   useEffect(() => {
     const fetchWords = async () => {
@@ -51,6 +54,14 @@ const Activity = ({
     setScore((prevState) => (prevState += 10));
   };
 
+  const btnActiveHandler = useCallback((isActive: boolean) => {
+    if (!isActive) {
+      setBtnListClasses(`${classes["btns-container"]} ${classes.disabled}`);
+    } else {
+      setBtnListClasses(`${classes["btns-container"]}`);
+    }
+  }, []);
+
   let progBar = 0;
   if (words.length) {
     progBar = (wordNum / words.length) * 100;
@@ -59,13 +70,14 @@ const Activity = ({
   return (
     <>
       <p className={classes.word}>{words[wordNum]?.word}</p>
-      <ul className={classes["btns-container"]}>
+      <ul className={btnListClasses}>
         <li>
           <MainBtn
             text="Noun"
             wordPos={words[wordNum]?.pos}
             setWordNum={setwordNumHandler}
             setScore={setScoreHandler}
+            btnActive={btnActiveHandler}
           />
         </li>
         <li>
@@ -74,6 +86,7 @@ const Activity = ({
             wordPos={words[wordNum]?.pos}
             setWordNum={setwordNumHandler}
             setScore={setScoreHandler}
+            btnActive={btnActiveHandler}
           />
         </li>
         <li>
@@ -82,6 +95,7 @@ const Activity = ({
             wordPos={words[wordNum]?.pos}
             setWordNum={setwordNumHandler}
             setScore={setScoreHandler}
+            btnActive={btnActiveHandler}
           />
         </li>
         <li>
@@ -90,6 +104,7 @@ const Activity = ({
             wordPos={words[wordNum]?.pos}
             setWordNum={setwordNumHandler}
             setScore={setScoreHandler}
+            btnActive={btnActiveHandler}
           />
         </li>
       </ul>

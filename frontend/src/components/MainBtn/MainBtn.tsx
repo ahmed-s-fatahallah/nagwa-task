@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import classes from "./MainBtn.module.css";
 
 interface MainBtnProps {
@@ -6,36 +6,42 @@ interface MainBtnProps {
   wordPos: string;
   setWordNum: () => void;
   setScore: () => void;
+  btnActive: (btnActive: boolean) => void;
 }
 
-const MainBtn = (props: MainBtnProps) => {
+const MainBtn = ({
+  text,
+  wordPos,
+  setWordNum,
+  setScore,
+  btnActive,
+}: MainBtnProps) => {
   const [btnClasses, setBtnClasses] = useState(classes.mainBtn);
-  const [isDisabled, setIsDisabled] = useState(false);
+  const [isBtnActive, setIsBtnActive] = useState(true);
+
+  useEffect(() => {
+    btnActive(isBtnActive);
+  }, [btnActive, isBtnActive]);
 
   const onClickHandler = () => {
-    if (props.wordPos.toLocaleLowerCase() === props.text.toLocaleLowerCase()) {
+    if (wordPos.toLocaleLowerCase() === text.toLocaleLowerCase()) {
       setBtnClasses((prevState) => `${prevState} ${classes.correct}`);
-      setIsDisabled(true);
-      props.setScore();
+      setIsBtnActive(false);
+      setScore();
     } else {
       setBtnClasses((prevState) => `${prevState} ${classes.wrong}`);
-      setIsDisabled(true);
+      setIsBtnActive(false);
     }
     setTimeout(() => {
       setBtnClasses(classes.mainBtn);
-      setIsDisabled(false);
-      props.setWordNum();
+      setIsBtnActive(true);
+      setWordNum();
     }, 1000);
   };
 
   return (
-    <button
-      type="button"
-      className={btnClasses}
-      onClick={onClickHandler}
-      disabled={isDisabled}
-    >
-      {props.text}
+    <button type="button" className={btnClasses} onClick={onClickHandler}>
+      {text}
     </button>
   );
 };
