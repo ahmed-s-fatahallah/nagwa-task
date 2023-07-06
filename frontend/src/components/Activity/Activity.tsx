@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import MainBtn from "../MainBtn/MainBtn";
 
 import classes from "./Activity.module.css";
@@ -9,10 +9,15 @@ interface word {
   pos: string;
 }
 
-const Activity = () => {
+const Activity = ({
+  activityStatus,
+}: {
+  activityStatus: (score: number, isEnded: boolean) => void;
+}) => {
   const [words, setWords] = useState<word[]>([]);
   const [wordNum, setWordNum] = useState(0);
   const [score, setScore] = useState(0);
+  const [isEnded, setIsEnded] = useState(false);
 
   useEffect(() => {
     const fetchWords = async () => {
@@ -30,19 +35,29 @@ const Activity = () => {
     fetchWords();
   }, []);
 
+  useEffect(() => {
+    if (isEnded) activityStatus(score, true);
+  }, [isEnded, activityStatus, score]);
+
   const setwordNumHandler = () => {
-    setWordNum((prevState) => (prevState += 1));
+    setWordNum((prevState) => prevState + 1);
+
+    if (wordNum === words.length - 1) {
+      setIsEnded(true);
+    }
   };
 
   const setScoreHandler = () => {
     setScore((prevState) => (prevState += 10));
   };
 
-  let progBar;
-  if (words.length) progBar = (wordNum / words.length) * 100;
+  let progBar = 0;
+  if (words.length) {
+    progBar = (wordNum / words.length) * 100;
+  }
 
   return (
-    <section className={classes["activity-section"]}>
+    <>
       <p className={classes.word}>{words[wordNum]?.word}</p>
       <ul className={classes["btns-container"]}>
         <li>
@@ -81,16 +96,16 @@ const Activity = () => {
       <div className={classes["prog-container"]}>
         <div className={classes["score-container"]}>
           <p>Score</p>
-          <span>{`${progBar}%`}</span>
+          <span>{`${progBar + 10}%`}</span>
         </div>
         <div className={classes["prog-bar-container"]}>
           <div
             className={classes["prog-bar"]}
-            style={{ width: `${progBar}%` }}
+            style={{ width: `${progBar + 10}%` }}
           ></div>
         </div>
       </div>
-    </section>
+    </>
   );
 };
 

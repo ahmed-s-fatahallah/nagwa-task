@@ -23,3 +23,11 @@
   margin-bottom: 2rem;
   font-family: serif;
 }
+
+.activity-section {
+  padding: 5rem;
+  border: 1px solid var(--color-white-300);
+  border-radius: 4px;
+
+  width: 60%;
+}
