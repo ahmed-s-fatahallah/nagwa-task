@@ -1,4 +1,4 @@
-import Logo from "../Logo.tsx";
+import Logo from "../Logo/Logo";
 import classes from "./Footer.module.css";
 
 const Footer = () => {
