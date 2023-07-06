@@ -20,11 +20,11 @@
   background-color: rgba(2, 107, 176, 0.1);
 }
 
-.mainBtn .wrong {
+.mainBtn.wrong {
   background-color: var(--color-red-200);
   color: var(--color-white-100);
 }
-.mainBtn .correct {
+.mainBtn.correct {
   background-color: var(--color-green-400);
   color: var(--color-white-100);
 }

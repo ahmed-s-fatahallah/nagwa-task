@@ -16,8 +16,9 @@
 .btns-container {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 4rem;
-
+  list-style: none;
   margin-top: 5rem;
 }
 
@@ -43,7 +44,8 @@
 
 .prog-bar {
   background-color: var(--color-blue-300);
-  width: 50%;
+  width: 0;
   height: 100%;
   border-radius: 4px;
+  transition: all 0.3s ease;
 }
