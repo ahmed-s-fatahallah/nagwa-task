@@ -20,10 +20,10 @@ const generateRank = (req: Request, res: Response) => {
   // check if the rank is an integer or a float number
   if (rank % 1 === 0) {
     // if it is an interger send the response with the rank % as a string
-    res.send(`${rank}%`);
+    res.send({ rank: `${rank}%` });
   } else {
     // if it is a float numberr send the response with the rank % rounded to the nearest hundredth as a string
-    res.send(`${rank.toFixed(2)}%`);
+    res.send({ rank: `${rank.toFixed(2)}%` });
   }
 };
 
