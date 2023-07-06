@@ -12,6 +12,7 @@ interface word {
 const Activity = () => {
   const [words, setWords] = useState<word[]>([]);
   const [wordNum, setWordNum] = useState(0);
+  const [score, setScore] = useState(0);
 
   useEffect(() => {
     const fetchWords = async () => {
@@ -33,6 +34,10 @@ const Activity = () => {
     setWordNum((prevState) => (prevState += 1));
   };
 
+  const setScoreHandler = () => {
+    setScore((prevState) => (prevState += 10));
+  };
+
   let progBar;
   if (words.length) progBar = (wordNum / words.length) * 100;
 
@@ -45,6 +50,7 @@ const Activity = () => {
             text="Noun"
             wordPos={words[wordNum]?.pos}
             setWordNum={setwordNumHandler}
+            setScore={setScoreHandler}
           />
         </li>
         <li>
@@ -52,6 +58,7 @@ const Activity = () => {
             text="Verb"
             wordPos={words[wordNum]?.pos}
             setWordNum={setwordNumHandler}
+            setScore={setScoreHandler}
           />
         </li>
         <li>
@@ -59,6 +66,7 @@ const Activity = () => {
             text="Adverb"
             wordPos={words[wordNum]?.pos}
             setWordNum={setwordNumHandler}
+            setScore={setScoreHandler}
           />
         </li>
         <li>
@@ -66,6 +74,7 @@ const Activity = () => {
             text="Adjective"
             wordPos={words[wordNum]?.pos}
             setWordNum={setwordNumHandler}
+            setScore={setScoreHandler}
           />
         </li>
       </ul>

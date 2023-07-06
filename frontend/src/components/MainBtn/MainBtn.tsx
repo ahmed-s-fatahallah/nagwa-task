@@ -5,16 +5,16 @@ interface MainBtnProps {
   text: string;
   wordPos: string;
   setWordNum: () => void;
+  setScore: () => void;
 }
 
 const MainBtn = (props: MainBtnProps) => {
   const [btnClasses, setBtnClasses] = useState(classes.mainBtn);
-  const [score, setScore] = useState(0);
 
   const onClickHandler = () => {
     if (props.wordPos.toLocaleLowerCase() === props.text.toLocaleLowerCase()) {
       setBtnClasses((prevState) => `${prevState} ${classes.correct}`);
-      setScore((prevState) => (prevState += 10));
+      props.setScore();
     } else {
       setBtnClasses((prevState) => `${prevState} ${classes.wrong}`);
     }
