@@ -1,8 +1,9 @@
 import { useContext } from "react";
-import Activity from "../Activity/Activity";
-import StartActivity from "../StartActivity/StartActivity";
+import Activity from "@components/Activity/Activity";
+import StartActivity from "@components/StartActivity/StartActivity";
+import MainContext from "@store/MainContext";
+
 import classes from "./Main.module.css";
-import MainContext from "../../store/MainContext";
 
 const Main = () => {
   const ctx = useContext(MainContext);

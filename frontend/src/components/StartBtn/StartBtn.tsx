@@ -1,7 +1,7 @@
 import { useContext } from "react";
-import classes from "./StartBtn.module.css";
-import MainContext from "../../store/MainContext";
+import MainContext from "@store/MainContext";
 
+import classes from "./StartBtn.module.css";
 interface StartBtnProps {
   text: string;
 }

@@ -1,18 +1,29 @@
+// REACT HOOKS IMPORTS
 import { useCallback, useContext, useEffect, useState } from "react";
-import MainBtn from "../MainBtn/MainBtn";
-import MainContext from "../../store/MainContext";
-import LoadingSpinner from "../util/loadingSpinner";
 
+// COMPONENTS IMPORTS
+import MainBtn from "@components/MainBtn/MainBtn";
+import MainContext from "@store/MainContext";
+import LoadingSpinner from "@components/LoadingSpinner/LoadingSpinner";
+
+// CSS MODULES IMPORTS
 import classes from "./Activity.module.css";
 
-interface word {
+// TYPES DEFINITIONS
+interface Word {
   id: number;
   word: string;
   pos: string;
 }
 
+/**
+ *  responsible for rendering the activity window and fetching
+ * the words array from the endpoint then display the word and the btns containing
+ * different word pos, also it is responsible for enabling and disabling the btns container.
+ * @component the activity window component.
+ */
 const Activity = () => {
-  const [words, setWords] = useState<word[]>([]);
+  const [words, setWords] = useState<Word[]>([]);
   const [wordNum, setWordNum] = useState(0);
   const [btnListClasses, setBtnListClasses] = useState(
     `${classes["btns-container"]}`

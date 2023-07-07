@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import MainContext from "../../store/MainContext";
+import MainContext from "@store/MainContext";
 
 import classes from "./MainBtn.module.css";
 

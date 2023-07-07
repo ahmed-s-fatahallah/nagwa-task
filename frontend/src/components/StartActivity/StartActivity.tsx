@@ -1,9 +1,9 @@
 import { useContext, useState, useEffect } from "react";
-import StartBtn from "../StartBtn/StartBtn";
+import StartBtn from "@components/StartBtn/StartBtn";
+import LoadingSpinner from "@components/LoadingSpinner/LoadingSpinner";
+import MainContext from "@store/MainContext";
 
 import classes from "./StartActivity.module.css";
-import MainContext from "../../store/MainContext";
-import LoadingSpinner from "../util/loadingSpinner";
 
 const StartActivity = () => {
   const ctx = useContext(MainContext);
