@@ -8,6 +8,7 @@ import LoadingSpinner from "@components/LoadingSpinner/LoadingSpinner";
 
 // CSS MODULES IMPORTS
 import classes from "./Activity.module.css";
+import { ENDPOINTS } from "@network/index";
 
 // TYPES DEFINITIONS
 interface Word {
@@ -39,7 +40,7 @@ const Activity = () => {
     const fetchWords = async () => {
       setIsLoading(true);
       try {
-        const res = await fetch("http://localhost:8080/words");
+        const res = await fetch(ENDPOINTS.words);
         const data = await res.json();
         setWords(data);
         setIsLoading(false);

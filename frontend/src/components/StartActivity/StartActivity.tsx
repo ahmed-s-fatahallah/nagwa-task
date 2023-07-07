@@ -4,6 +4,7 @@ import LoadingSpinner from "@components/LoadingSpinner/LoadingSpinner";
 import MainContext from "@store/MainContext";
 
 import classes from "./StartActivity.module.css";
+import { ENDPOINTS } from "@network/index";
 
 const StartActivity = () => {
   const ctx = useContext(MainContext);
@@ -18,7 +19,7 @@ const StartActivity = () => {
     const postScore = async () => {
       setIsLoading(true);
       try {
-        const res = await fetch("http://localhost:8080/rank", {
+        const res = await fetch(ENDPOINTS.rank, {
           method: "POST",
           mode: "cors",
           headers: {
