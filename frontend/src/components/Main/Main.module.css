@@ -29,5 +29,11 @@
   border: 1px solid var(--color-white-300);
   border-radius: 4px;
 
-  width: 60%;
+  max-width: 82.5rem;
+}
+
+@media screen and (max-width: 768px) {
+  .activity-section {
+    padding: 4rem 2rem;
+  }
 }
