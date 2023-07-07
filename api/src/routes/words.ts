@@ -1,5 +1,6 @@
 //  DEPENDANCIES IMPORTS
 import { Application, Request, Response } from "express";
+import shuffle from "lodash.shuffle";
 
 //  DATA FILE IMPORT
 import data from "./../assets/TestData.json";
@@ -8,11 +9,14 @@ import data from "./../assets/TestData.json";
 import getRandomItem from "../util/getRandomItem";
 
 //  Types defination
+type Pos = "noun" | "verb" | "adverb" | "adjective";
 interface Word {
   id: number;
   word: string;
-  pos: string;
+  pos: Pos;
 }
+
+type WordsSegregated = Record<Pos, Word[]>;
 
 /**
  * This function is used to generate random words array and send it as a response
@@ -20,34 +24,40 @@ interface Word {
  * @param res response object which responds with the words array
  */
 const generateRndWordsArry = (_req: Request, res: Response) => {
+  const words = data.wordList as Word[];
   // create empty array to store the generated words
-  const wordsArry: Word[] = [];
-  // array of the 4 types of pos to make sure that all of them are included in the generated words array
-  const posArry = ["noun", "verb", "adjective", "adverb"];
+  const pickedWords: Word[] = [];
+  const segregatedWords: WordsSegregated = {
+    noun: [],
+    verb: [],
+    adverb: [],
+    adjective: [],
+  };
 
-  // loop to populate the words array with 10 items
-  while (wordsArry.length < 10) {
-    // generate a random word from data word list
-    const randomWord = getRandomItem(data.wordList);
+  words.forEach((word) => {
+    if (!Object.keys(segregatedWords).includes(word.pos)) {
+      // if invalid data missing word pos handle error here
+      return;
+    }
+    segregatedWords[word.pos].push(word);
+  });
 
-    // loop inside the posArry to make sure that the final arary contains all 4 types of pos words
-    posArry.forEach((el, i) => {
-      // if statement that check if the random generated word equals one of the 4 types of pos
-      // if true then remove that type from the pos array and add the word to the words array
-      if (randomWord.pos === el) {
-        posArry.splice(i, 1);
-        wordsArry.push(randomWord);
-      }
-    });
+  // Add one random word from each POS
+  let pos: keyof WordsSegregated;
+  for (pos in segregatedWords) {
+    pickedWords.push(getRandomItem(segregatedWords[pos]));
+  }
 
-    // when the foreach loop finishes we will have 4 uniqe types of pos words inside the words array
-    // then after we can just add random generated words to the words array
-    if (wordsArry.length >= 4) {
-      wordsArry.push(randomWord);
+  // populate the rest of the array with random unique words.
+  while (pickedWords.length < 10) {
+    const randomWord = getRandomItem(words);
+    if (pickedWords.every((word) => word.id !== randomWord.id)) {
+      pickedWords.push(randomWord);
     }
   }
-  // respond with the words array
-  res.send(wordsArry);
+
+  // respond with the words array shuffled
+  res.send(shuffle(pickedWords));
 };
 
 /**
