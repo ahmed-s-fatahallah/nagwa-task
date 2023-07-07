@@ -1,5 +1,7 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import MainBtn from "../MainBtn/MainBtn";
+import MainContext from "../../store/MainContext";
+import LoadingSpinner from "../util/loadingSpinner";
 
 import classes from "./Activity.module.css";
 
@@ -9,49 +11,46 @@ interface word {
   pos: string;
 }
 
-const Activity = ({
-  activityStatus,
-}: {
-  activityStatus: (score: number, isEnded: boolean) => void;
-}) => {
+const Activity = () => {
   const [words, setWords] = useState<word[]>([]);
   const [wordNum, setWordNum] = useState(0);
-  const [score, setScore] = useState(0);
-  const [isEnded, setIsEnded] = useState(false);
   const [btnListClasses, setBtnListClasses] = useState(
     `${classes["btns-container"]}`
   );
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState({
+    isError: false,
+    msg: "",
+  });
+  const ctx = useContext(MainContext);
 
   useEffect(() => {
     const fetchWords = async () => {
+      setIsLoading(true);
       try {
         const res = await fetch("http://localhost:8080/words");
         const data = await res.json();
         setWords(data);
+        setIsLoading(false);
       } catch (error: unknown) {
-        if (error instanceof Error)
-          console.log(
-            `sorry an error has occured while getting the data ${error}`
-          );
+        if (error instanceof Error) {
+          setIsLoading(false);
+          setError({
+            isError: true,
+            msg: `An error occured during fetching data! Please try again later! "${error}"`,
+          });
+        }
       }
     };
     fetchWords();
   }, []);
 
-  useEffect(() => {
-    if (isEnded) activityStatus(score, true);
-  }, [isEnded, activityStatus, score]);
-
   const setwordNumHandler = () => {
     setWordNum((prevState) => prevState + 1);
 
     if (wordNum === words.length - 1) {
-      setIsEnded(true);
+      ctx.endActivity();
     }
-  };
-
-  const setScoreHandler = () => {
-    setScore((prevState) => (prevState += 10));
   };
 
   const btnActiveHandler = useCallback((isActive: boolean) => {
@@ -68,59 +67,67 @@ const Activity = ({
   }
 
   return (
-    <>
-      <p className={classes.word}>{words[wordNum]?.word}</p>
-      <ul className={btnListClasses}>
-        <li>
-          <MainBtn
-            text="Noun"
-            wordPos={words[wordNum]?.pos}
-            setWordNum={setwordNumHandler}
-            setScore={setScoreHandler}
-            btnActive={btnActiveHandler}
-          />
-        </li>
-        <li>
-          <MainBtn
-            text="Verb"
-            wordPos={words[wordNum]?.pos}
-            setWordNum={setwordNumHandler}
-            setScore={setScoreHandler}
-            btnActive={btnActiveHandler}
-          />
-        </li>
-        <li>
-          <MainBtn
-            text="Adverb"
-            wordPos={words[wordNum]?.pos}
-            setWordNum={setwordNumHandler}
-            setScore={setScoreHandler}
-            btnActive={btnActiveHandler}
-          />
-        </li>
-        <li>
-          <MainBtn
-            text="Adjective"
-            wordPos={words[wordNum]?.pos}
-            setWordNum={setwordNumHandler}
-            setScore={setScoreHandler}
-            btnActive={btnActiveHandler}
-          />
-        </li>
-      </ul>
-      <div className={classes["prog-container"]}>
-        <div className={classes["score-container"]}>
-          <p>Score</p>
-          <span>{`${progBar + 10}%`}</span>
-        </div>
-        <div className={classes["prog-bar-container"]}>
-          <div
-            className={classes["prog-bar"]}
-            style={{ width: `${progBar + 10}%` }}
-          ></div>
-        </div>
-      </div>
-    </>
+    <div className={classes["activity-container"]}>
+      {isLoading ? (
+        <LoadingSpinner />
+      ) : (
+        <>
+          {error.isError ? (
+            <p>{error.msg}</p>
+          ) : (
+            <>
+              <p className={classes.word}>{words[wordNum]?.word}</p>
+              <ul className={btnListClasses}>
+                <li>
+                  <MainBtn
+                    text="Noun"
+                    wordPos={words[wordNum]?.pos}
+                    setWordNum={setwordNumHandler}
+                    btnActive={btnActiveHandler}
+                  />
+                </li>
+                <li>
+                  <MainBtn
+                    text="Verb"
+                    wordPos={words[wordNum]?.pos}
+                    setWordNum={setwordNumHandler}
+                    btnActive={btnActiveHandler}
+                  />
+                </li>
+                <li>
+                  <MainBtn
+                    text="Adverb"
+                    wordPos={words[wordNum]?.pos}
+                    setWordNum={setwordNumHandler}
+                    btnActive={btnActiveHandler}
+                  />
+                </li>
+                <li>
+                  <MainBtn
+                    text="Adjective"
+                    wordPos={words[wordNum]?.pos}
+                    setWordNum={setwordNumHandler}
+                    btnActive={btnActiveHandler}
+                  />
+                </li>
+              </ul>
+              <div className={classes["prog-container"]}>
+                <div className={classes["score-container"]}>
+                  <p>Score</p>
+                  <span>{`${progBar + 10}%`}</span>
+                </div>
+                <div className={classes["prog-bar-container"]}>
+                  <div
+                    className={classes["prog-bar"]}
+                    style={{ width: `${progBar + 10}%` }}
+                  ></div>
+                </div>
+              </div>
+            </>
+          )}
+        </>
+      )}
+    </div>
   );
 };
 

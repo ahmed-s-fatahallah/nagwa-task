@@ -1,23 +1,19 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import MainContext from "../../store/MainContext";
+
 import classes from "./MainBtn.module.css";
 
 interface MainBtnProps {
   text: string;
   wordPos: string;
   setWordNum: () => void;
-  setScore: () => void;
   btnActive: (btnActive: boolean) => void;
 }
 
-const MainBtn = ({
-  text,
-  wordPos,
-  setWordNum,
-  setScore,
-  btnActive,
-}: MainBtnProps) => {
+const MainBtn = ({ text, wordPos, setWordNum, btnActive }: MainBtnProps) => {
   const [btnClasses, setBtnClasses] = useState(classes.mainBtn);
   const [isBtnActive, setIsBtnActive] = useState(true);
+  const ctx = useContext(MainContext);
 
   useEffect(() => {
     btnActive(isBtnActive);
@@ -26,8 +22,8 @@ const MainBtn = ({
   const onClickHandler = () => {
     if (wordPos.toLocaleLowerCase() === text.toLocaleLowerCase()) {
       setBtnClasses((prevState) => `${prevState} ${classes.correct}`);
+      ctx.updateScore();
       setIsBtnActive(false);
-      setScore();
     } else {
       setBtnClasses((prevState) => `${prevState} ${classes.wrong}`);
       setIsBtnActive(false);
