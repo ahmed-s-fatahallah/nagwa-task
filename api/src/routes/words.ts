@@ -5,10 +5,10 @@ import { Application, Request, Response } from "express";
 import data from "./../assets/TestData.json";
 
 //  UTILITIES FUNCTIONS IMPORTS
-import randomWordGenerator from "../util/randomWord";
+import getRandomItem from "../util/getRandomItem";
 
 //  Types defination
-interface word {
+interface Word {
   id: number;
   word: string;
   pos: string;
@@ -21,14 +21,14 @@ interface word {
  */
 const generateRndWordsArry = (_req: Request, res: Response) => {
   // create empty array to store the generated words
-  const wordsArry: word[] = [];
+  const wordsArry: Word[] = [];
   // array of the 4 types of pos to make sure that all of them are included in the generated words array
   const posArry = ["noun", "verb", "adjective", "adverb"];
 
   // loop to populate the words array with 10 items
   while (wordsArry.length < 10) {
     // generate a random word from data word list
-    const randomWord = randomWordGenerator(data.wordList);
+    const randomWord = getRandomItem(data.wordList);
 
     // loop inside the posArry to make sure that the final arary contains all 4 types of pos words
     posArry.forEach((el, i) => {
