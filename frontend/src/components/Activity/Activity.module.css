@@ -1,3 +1,14 @@
+.activity-container {
+  min-height: 22.5rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 2rem;
+  font-size: 1.5rem;
+}
+
 .word {
   text-align: center;
   font-size: 2.4rem;
@@ -20,6 +31,7 @@
 }
 
 .prog-container {
+  width: 100%;
   margin-top: 5rem;
 }
 
