@@ -14,4 +14,7 @@ export default defineConfig({
       "@interfaces": path.resolve(__dirname, "./src/interfaces"),
     },
   },
+  server: {
+    port: 3000,
+  },
 });
