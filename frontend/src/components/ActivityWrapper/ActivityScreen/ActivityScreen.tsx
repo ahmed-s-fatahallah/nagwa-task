@@ -93,7 +93,6 @@ const ActivityScreen = () => {
 
   // Calculate the progress bar according to the received array length and the current showing element index;
   const progBar = words.length && (wordNum / words.length) * 100;
-  console.log(isLoading);
 
   return (
     <>
