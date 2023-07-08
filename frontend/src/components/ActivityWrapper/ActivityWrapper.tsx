@@ -10,7 +10,7 @@ const ActivityWrapper = () => {
   const { isStarted, isEnded } = useContext(MainContext);
   return (
     <div className={classes["activity-container"]}>
-      {!isStarted ? <StartScreen /> : !isEnded ? <Activity /> : <EndScreen />}
+      {isStarted ? <Activity /> : isEnded ? <EndScreen /> : <StartScreen />}
     </div>
   );
 };
