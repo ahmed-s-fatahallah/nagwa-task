@@ -18,7 +18,7 @@ app.listen(port, () => {
   console.log(`server is running on port ${port}`);
 });
 
-app.get("/", (req, res) => {
+app.get("/", (_req, res) => {
   res.send("hello, this is ahmed's server for Nagwa task");
 });
 
