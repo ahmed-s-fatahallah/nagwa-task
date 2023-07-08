@@ -1,0 +1,10 @@
+.activity-container {
+  min-height: 22.5rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 2rem;
+  font-size: 1.5rem;
+}

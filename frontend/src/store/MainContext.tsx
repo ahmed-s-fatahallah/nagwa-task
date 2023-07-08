@@ -4,12 +4,16 @@ const MainContext = createContext({
   score: 0,
   isStarted: false,
   isEnded: false,
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  updateScore: () => {},
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  isLoading: false,
+  error: { isError: false, msg: "" },
+  /* eslint-disable @typescript-eslint/no-empty-function*/
+  incrementScore: () => {},
   startActivity: () => {},
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
   endActivity: () => {},
+  resetScore: () => {},
+  setError: (msg: string) => {},
+  setLoading: () => {},
+  /* eslint-enable @typescript-eslint/no-empty-function */
 });
 
 export const MainContextProvider = (props: { children: ReactNode }) => {
@@ -17,28 +21,53 @@ export const MainContextProvider = (props: { children: ReactNode }) => {
   const [isStarted, setIsStarted] = useState(false);
   const [isEnded, setIsEnded] = useState(false);
 
-  const updateScoreHandler = () => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState({
+    isError: false,
+    msg: "",
+  });
+
+  const incrementScoreHandler = () => {
     setScore((prevState) => prevState + 10);
   };
-
+  // console.log(score);
+  const resetScoreHandler = () => {
+    setScore(0);
+  };
   const startHandler = () => {
     setIsStarted(true);
     setIsEnded(false);
+    setScore(0);
   };
   const endHandler = () => {
     setIsStarted(false);
     setIsEnded(true);
   };
 
+  const loadingHandler = () => {
+    setIsLoading((prevState) => !prevState);
+  };
+  const errorHandler = (msg: string) => {
+    setError({
+      isError: true,
+      msg,
+    });
+  };
+  console.log(score);
   return (
     <MainContext.Provider
       value={{
         score,
         isStarted,
         isEnded,
-        updateScore: updateScoreHandler,
+        isLoading,
+        error,
+        incrementScore: incrementScoreHandler,
         startActivity: startHandler,
         endActivity: endHandler,
+        resetScore: resetScoreHandler,
+        setLoading: loadingHandler,
+        setError: errorHandler,
       }}
     >
       {props.children}
