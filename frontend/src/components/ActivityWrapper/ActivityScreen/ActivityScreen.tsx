@@ -42,16 +42,16 @@ const ActivityScreen = () => {
   } = useContext(MainContext);
 
   useEffect(() => {
+    setLoading(true);
     const fetchWords = async () => {
-      setLoading();
       try {
         const res = await fetch(ENDPOINTS.words);
         const data = await res.json();
         if (data) setWords(data);
-        setLoading();
+        setLoading(false);
       } catch (error: unknown) {
         if (error instanceof Error) {
-          setLoading();
+          setLoading(false);
           setError({
             isError: true,
             msg: `An error occurred during fetching data! Please try again later! "${error}"`,
@@ -93,6 +93,7 @@ const ActivityScreen = () => {
 
   // Calculate the progress bar according to the received array length and the current showing element index;
   const progBar = words.length && (wordNum / words.length) * 100;
+  console.log(isLoading);
 
   return (
     <>

@@ -14,7 +14,8 @@ const MainContext = createContext({
   endActivity: () => {},
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   setError: (_error: { isError: boolean; msg: string }) => {},
-  setLoading: () => {},
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  setLoading: (_isLoading: boolean) => {},
   /* eslint-enable @typescript-eslint/no-empty-function */
 });
 
@@ -43,8 +44,8 @@ export const MainContextProvider = (props: { children: ReactNode }) => {
     setIsEnded(true);
   };
 
-  const loadingHandler = () => {
-    setIsLoading((prevState) => !prevState);
+  const loadingHandler = (isLoading: boolean) => {
+    setIsLoading(isLoading);
   };
   const errorHandler = (error: { isError: boolean; msg: string }) => {
     setError({

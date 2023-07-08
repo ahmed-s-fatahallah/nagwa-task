@@ -28,8 +28,8 @@ const EndScreen = () => {
   const [rank, SetRank] = useState("");
 
   useEffect(() => {
+    setLoading(true);
     const postScore = async () => {
-      setLoading();
       try {
         const res = await fetch(ENDPOINTS.rank, {
           method: "POST",
@@ -43,10 +43,10 @@ const EndScreen = () => {
         });
         const data = await res.json();
         SetRank(data.rank);
-        setLoading();
+        setLoading(false);
       } catch (error: unknown) {
         if (error instanceof Error) {
-          setLoading();
+          setLoading(false);
           setError({
             isError: true,
             msg: `An error occurred during fetching data! Please try again later! "${error}"`,
