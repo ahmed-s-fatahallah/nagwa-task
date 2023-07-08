@@ -30,10 +30,6 @@ export const MainContextProvider = (props: { children: ReactNode }) => {
   const incrementScoreHandler = () => {
     setScore((prevState) => prevState + 10);
   };
-  // console.log(score);
-  const resetScoreHandler = () => {
-    setScore(0);
-  };
   const startHandler = () => {
     setIsStarted(true);
     setIsEnded(false);
@@ -47,10 +43,10 @@ export const MainContextProvider = (props: { children: ReactNode }) => {
   const loadingHandler = () => {
     setIsLoading((prevState) => !prevState);
   };
-  const errorHandler = (msg: string) => {
+  const errorHandler = (error: { isError: boolean; msg: string }) => {
     setError({
-      isError: true,
-      msg,
+      isError: error.isError,
+      msg: error.msg,
     });
   };
 
@@ -65,7 +61,6 @@ export const MainContextProvider = (props: { children: ReactNode }) => {
         incrementScore: incrementScoreHandler,
         startActivity: startHandler,
         endActivity: endHandler,
-        resetScore: resetScoreHandler,
         setLoading: loadingHandler,
         setError: errorHandler,
       }}

@@ -39,9 +39,7 @@ const EndScreen = () => {
       } catch (error: unknown) {
         if (error instanceof Error) {
           setLoading();
-          setError(
-            `An error occurred during fetching data! Please try again later! "${error}"`
-          );
+            msg: `An error occurred during fetching data! Please try again later! "${error}"`,
         }
       }
     };
