@@ -52,7 +52,7 @@
 
 .prog-bar-container {
   width: 100%;
-  background-color: var(--color-white-300);
+  background-color: var(--color-grey-200);
   height: 0.5rem;
   border-radius: 4px;
 }

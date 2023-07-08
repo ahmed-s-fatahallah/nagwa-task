@@ -9,10 +9,10 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 
-  --color-white-100: #fff;
-  --color-white-200: #e6e6e6;
-  --color-white-300: #ddd;
+  --color-white: #fff;
 
+  --color-grey-100: #e6e6e6;
+  --color-grey-200: #ddd;
   --color-grey-300: #333;
   --color-grey-500: #999;
 
