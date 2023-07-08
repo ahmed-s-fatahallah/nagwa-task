@@ -1,14 +1,3 @@
-.activity-container {
-  min-height: 22.5rem;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  gap: 2rem;
-  font-size: 1.5rem;
-}
-
 .word {
   text-align: center;
   font-size: 2.4rem;
@@ -30,10 +19,6 @@
   gap: 1.5rem;
   list-style: none;
   margin-top: 5rem;
-}
-
-.disabled {
-  pointer-events: none;
 }
 
 .prog-container {
