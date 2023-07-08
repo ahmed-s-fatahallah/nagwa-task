@@ -2,7 +2,7 @@
 import { useContext } from "react";
 
 // COMPONENTS && CONTEXT IMPORTS
-import Button from "@components/Button/Button";
+import Button from "@components/button/Button";
 import MainContext from "@store/MainContext";
 
 /**
