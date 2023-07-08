@@ -92,7 +92,7 @@ const ActivityScreen = () => {
       ) : (
         <>
           {error.isError ? (
-            <p>{error.msg}</p>
+            <p className="error">{error.msg}</p>
           ) : (
             <>
               <p

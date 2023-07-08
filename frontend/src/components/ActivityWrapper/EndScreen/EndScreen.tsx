@@ -55,7 +55,7 @@ const EndScreen = () => {
       ) : (
         <>
           {error.isError ? (
-            <p>{error.msg}</p>
+            <p className="error">{error.msg}</p>
           ) : (
             <>
               <Button variant="primary" onClick={startActivity}>
