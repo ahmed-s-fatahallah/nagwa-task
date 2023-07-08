@@ -7,3 +7,33 @@ body {
   margin: 0 auto;
   padding: 0 2rem;
 }
+
+.error {
+  font-weight: 700;
+  font-size: 1.8rem;
+  color: var(--color-red-200);
+}
+
+.horizontal-shake {
+  animation: horizontal-shake 125ms infinite;
+}
+
+.pulse {
+  animation: pulse 350ms infinite;
+}
+
+@keyframes pulse {
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+@keyframes horizontal-shake {
+  0%,
+  100% {
+    transform: translateX(-0.125rem);
+  }
+  50% {
+    transform: translateX(0.125rem);
+  }
+}
