@@ -16,6 +16,12 @@
   font-weight: 700;
   font-family: sans-serif;
 }
+.correct {
+  color: var(--color-green-400);
+}
+.wrong {
+  color: var(--color-red-200);
+}
 
 .btns-container {
   width: 100%;

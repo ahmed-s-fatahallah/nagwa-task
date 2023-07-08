@@ -95,7 +95,17 @@ const ActivityScreen = () => {
             <p>{error.msg}</p>
           ) : (
             <>
-              <p className={classes.word}>{words[wordNum]?.word}</p>
+              <p
+                className={`${classes.word}  ${
+                  clickedPos === null
+                    ? ""
+                    : clickedPos === words[wordNum]?.pos
+                    ? classes.correct
+                    : classes.wrong
+                } `}
+              >
+                {words[wordNum]?.word}
+              </p>
               <ul className={classes["btns-container"]}>
                 {POS_OPTIONS.map((pos) => (
                   <li key={pos}>
