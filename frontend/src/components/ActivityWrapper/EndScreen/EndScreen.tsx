@@ -2,7 +2,7 @@
 import { useContext, useState, useEffect } from "react";
 
 // COMPONENTS && CONTEXT IMPORTS
-import LoadingSpinner from "@components/LoadingSpinner/LoadingSpinner";
+import LoadingSpinner from "@components/loadingSpinner/LoadingSpinner";
 import Button from "@components/Button/Button";
 import { ENDPOINTS } from "@network/index";
 import MainContext from "@store/MainContext";
@@ -16,6 +16,8 @@ import classes from "./EndScreen.module.css";
  * @component The end screen component.
  */
 const EndScreen = () => {
+  const [rank, SetRank] = useState("");
+
   const {
     score,
     isEnded,
@@ -25,7 +27,6 @@ const EndScreen = () => {
     setError,
     startActivity,
   } = useContext(MainContext);
-  const [rank, SetRank] = useState("");
 
   useEffect(() => {
     setLoading(true);
