@@ -70,7 +70,7 @@ const EndScreen = () => {
           ) : (
             <>
               <Button variant="primary" onClick={startActivity}>
-                Restart Activity
+                Try Again
               </Button>
               <div className={classes.rank}>
                 <p>Your rank is:&nbsp;</p>
