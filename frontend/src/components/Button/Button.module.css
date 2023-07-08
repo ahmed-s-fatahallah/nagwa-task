@@ -1,70 +1,63 @@
+/* shared button styles */
 .btn {
-  background-color: transparent;
   border: none;
-
   padding: 1.5rem;
   font-size: 1.6rem;
   font-weight: 700;
-  color: var(--color-grey-300);
-  border: 1px solid var(--color-white-300);
   line-height: 1.5;
-  width: 100%;
+  text-align: center;
   text-transform: capitalize;
   cursor: pointer;
   border-radius: 4px;
-  transition: all 0.3s ease;
+  transition: color 0.3s ease;
 }
 
-.btn:hover:not(:disabled) {
-  color: #026bb0;
-  background-color: rgba(2, 107, 176, 0.1);
-}
-
-.btn.wrong {
-  background-color: var(--color-red-200);
-  color: var(--color-white-100);
-  animation: horizontal-shake 350ms infinite;
-}
-.btn.correct {
-  background-color: var(--color-green-400);
-  color: var(--color-white-100);
-  animation: pulse 350ms infinite;
-}
 .btn:disabled {
   cursor: not-allowed;
 }
 
-.start-btn {
-  border: none;
+/* primary specific button styles*/
+.btn.primary {
   background-color: var(--color-blue-300);
-  color: var(--color-white-100);
+  color: var(--color-white);
   font-size: 1.3rem;
   text-transform: uppercase;
-  font-weight: 700;
   letter-spacing: 1px;
   line-height: 1;
-  text-align: center;
-  padding: 0 2rem;
-  border-radius: 4px;
-  cursor: pointer;
-  height: 3.8rem;
+  padding: 1.5rem 2rem;
 }
-
-.start-btn:hover {
+.btn.primary:hover:not(:disabled) {
   background-color: var(--color-blue-200);
 }
 
-@keyframes pulse {
-  50% {
-    transform: scale(1.1);
-  }
+/* secondary specific button styles*/
+.btn.secondary {
+  background-color: var(--color-green-400);
+  color: var(--color-white);
 }
-@keyframes horizontal-shake {
-  0%,
-  100% {
-    transform: translateX(-0.125rem);
-  }
-  50% {
-    transform: translateX(0.125rem);
-  }
+
+.btn.secondary:hover:not(:disabled) {
+  background-color: var(--color-green-300);
+}
+
+/* danger specific button styles*/
+.btn.danger {
+  background-color: var(--color-red-200);
+  color: var(--color-white);
+}
+
+.btn.danger:hover:not(:disabled) {
+  background-color: var(--color-red-100);
+}
+
+/* outlined specific button styles*/
+.btn.outlined {
+  background-color: transparent;
+  color: var(--color-grey-300);
+  border: 1px solid var(--color-grey-200);
+}
+
+.btn.outlined:hover:not(:disabled) {
+  color: #026bb0;
+  background-color: rgba(2, 107, 176, 0.1);
 }

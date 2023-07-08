@@ -58,7 +58,7 @@ const EndScreen = () => {
             <p>{error.msg}</p>
           ) : (
             <>
-              <Button variant="main" onClickHandler={startActivity}>
+              <Button variant="primary" onClick={startActivity}>
                 Restart Activity
               </Button>
               <div className={classes.rank}>

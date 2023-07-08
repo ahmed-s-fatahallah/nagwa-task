@@ -107,23 +107,34 @@ const ActivityScreen = () => {
                 {words[wordNum]?.word}
               </p>
               <ul className={classes["btns-container"]}>
-                {POS_OPTIONS.map((pos) => (
+                {POS_OPTIONS.map((pos) => {
+                  const isClicked = clickedPos === pos;
+                  const isCorrect = words[wordNum]?.pos === pos;
+                  return (
                   <li key={pos}>
                     <Button
-                      clickedPos={clickedPos}
+                        className={`${classes["option-btn"]} ${
+                          !isClicked
+                            ? ""
+                            : isCorrect
+                            ? "pulse"
+                            : "horizontal-shake"
+                        }`}
+                        disabled={Boolean(clickedPos)}
                       variant={
-                        clickedPos === pos
-                          ? words[wordNum]?.pos === clickedPos
+                          !isClicked
+                            ? "outlined"
+                            : isCorrect
                             ? "secondary"
                             : "danger"
-                          : "outlined"
                       }
-                      onClickHandler={onClickHandler.bind(null, pos)}
+                        onClick={onClickHandler.bind(null, pos)}
                     >
                       {pos}
                     </Button>
                   </li>
-                ))}
+                  );
+                })}
               </ul>
 
               <div className={classes["prog-container"]}>
