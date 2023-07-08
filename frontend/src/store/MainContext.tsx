@@ -53,7 +53,7 @@ export const MainContextProvider = (props: { children: ReactNode }) => {
       msg,
     });
   };
-  console.log(score);
+
   return (
     <MainContext.Provider
       value={{

@@ -1,14 +1,7 @@
-import { useContext } from "react";
-import Activity from "@components/ActivityWrapper/ActivityScreen/ActivityScreen";
-import StartActivity from "@components/ActivityWrapper/EndScreen/EndScreen";
-import MainContext from "@store/MainContext";
-
 import classes from "./Main.module.css";
 import ActivityWrapper from "@components/ActivityWrapper/ActivityWrapper";
 
 const Main = () => {
-  const ctx = useContext(MainContext);
-
   return (
     <main className={classes.main}>
       <div className="container">
