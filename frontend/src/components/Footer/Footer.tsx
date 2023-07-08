@@ -1,6 +1,13 @@
+// COMPONENTS IMPORTS
 import Logo from "@components/Logo/Logo";
+
+// CSS MODULES IMPORTS
 import classes from "./Footer.module.css";
 
+/**
+ * this component is responsible for rendering the footer section
+ * @component The footer section component
+ */
 const Footer = () => {
   return (
     <footer className={classes.footer}>
@@ -17,4 +24,5 @@ const Footer = () => {
   );
 };
 
+// EXPORTS STATEMENTS
 export default Footer;

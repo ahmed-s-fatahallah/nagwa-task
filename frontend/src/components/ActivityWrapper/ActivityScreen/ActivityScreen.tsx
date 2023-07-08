@@ -1,12 +1,11 @@
 // REACT HOOKS IMPORTS
 import { useContext, useEffect, useState } from "react";
 
-// COMPONENTS IMPORTS
-
+// COMPONENTS && CONTEXT IMPORTS
 import LoadingSpinner from "@components/LoadingSpinner/LoadingSpinner";
+import Button from "@components/Button/Button";
 import { ENDPOINTS } from "@network/index";
 import MainContext from "@store/MainContext";
-import Button from "@components/Button/Button";
 
 // CSS MODULES IMPORTS
 import classes from "./Activity.module.css";
@@ -18,15 +17,15 @@ interface Word {
   word: string;
   pos: Pos;
 }
-
 const POS_OPTIONS: Pos[] = ["noun", "verb", "adverb", "adjective"];
+
+// GLOBAL VARIABLES
 const TIMEOUT_DURATION = 1000; //ms
 
 /**
- *  responsible for rendering the activity window and fetching
- * the words array from the endpoint then display the word and the btns containing
- * different word pos, also it is responsible for enabling and disabling the btns container.
- * @component the activity window component.
+ *  responsible for rendering the activity screen and fetching the words array from the endpoint
+ *  and display the word and the buttons containing different word pos.
+ * @component the activity screen component.
  */
 const ActivityScreen = () => {
   const [words, setWords] = useState<Word[]>([]);
@@ -53,11 +52,15 @@ const ActivityScreen = () => {
       } catch (error: unknown) {
         if (error instanceof Error) {
           setLoading();
+          setError({
             isError: true,
+            msg: `An error occurred during fetching data! Please try again later! "${error}"`,
+          });
         }
       }
     };
     fetchWords();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -65,7 +68,9 @@ const ActivityScreen = () => {
     if (clickedPos) {
       timeout = setTimeout(() => {
         setClickedPos(null);
+        // Increment the num to show the next word from the array
         setWordNum((prev) => prev + 1);
+        // Condition to check if the activity has ended
         if (wordNum === words.length - 1) {
           endActivity();
         }
@@ -74,17 +79,23 @@ const ActivityScreen = () => {
     return () => clearTimeout(timeout);
   }, [clickedPos, wordNum, words, endActivity]);
 
+  /**
+   * This function takes the current clicked button POS and check if it's equal to the current word POS.
+   * @param pos The clicked button POS
+   */
   const onClickHandler = (pos: Pos) => {
     setClickedPos(pos);
     if (words[wordNum]?.pos === pos) {
+      // If the clicked button has the correct POS increment score
       incrementScore();
     }
   };
 
+  // Calculate the progress bar according to the received array length and the current showing element index;
   const progBar = words.length && (wordNum / words.length) * 100;
 
   return (
-    <div className={classes["activity-container"]}>
+    <>
       {isLoading ? (
         <LoadingSpinner />
       ) : (
@@ -109,8 +120,8 @@ const ActivityScreen = () => {
                   const isClicked = clickedPos === pos;
                   const isCorrect = words[wordNum]?.pos === pos;
                   return (
-                  <li key={pos}>
-                    <Button
+                    <li key={pos}>
+                      <Button
                         className={`${classes["option-btn"]} ${
                           !isClicked
                             ? ""
@@ -119,18 +130,18 @@ const ActivityScreen = () => {
                             : "horizontal-shake"
                         }`}
                         disabled={Boolean(clickedPos)}
-                      variant={
+                        variant={
                           !isClicked
                             ? "outlined"
                             : isCorrect
                             ? "secondary"
                             : "danger"
-                      }
+                        }
                         onClick={onClickHandler.bind(null, pos)}
-                    >
-                      {pos}
-                    </Button>
-                  </li>
+                      >
+                        {pos}
+                      </Button>
+                    </li>
                   );
                 })}
               </ul>
@@ -151,8 +162,9 @@ const ActivityScreen = () => {
           )}
         </>
       )}
-    </div>
+    </>
   );
 };
 
+// EXPORTS STATEMENTS
 export default ActivityScreen;

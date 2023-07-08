@@ -1,7 +1,14 @@
+// REACT HOOKS IMPORTS
 import { useContext } from "react";
+
+// COMPONENTS && CONTEXT IMPORTS
 import Button from "@components/Button/Button";
 import MainContext from "@store/MainContext";
 
+/**
+ * This component responsible for rendering the start activity screen
+ * @component The start activity screen component
+ */
 const StartScreen = () => {
   const { startActivity } = useContext(MainContext);
   return (
@@ -11,4 +18,5 @@ const StartScreen = () => {
   );
 };
 
+// EXPORTS STATEMENTS
 export default StartScreen;

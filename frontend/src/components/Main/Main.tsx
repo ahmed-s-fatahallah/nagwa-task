@@ -1,6 +1,14 @@
-import classes from "./Main.module.css";
+// COMPONENTS IMPORTS
 import ActivityWrapper from "@components/ActivityWrapper/ActivityWrapper";
 
+// CSS MODULES IMPORTS
+import classes from "./Main.module.css";
+
+/**
+ * This component is responsible for rendering the header text above the activity window and the description,
+ * in addition to the activity section which has the activity windows inside of it.
+ * @component This is the main component
+ */
 const Main = () => {
   return (
     <main className={classes.main}>
@@ -23,4 +31,5 @@ const Main = () => {
   );
 };
 
+// EXPORT STATEMENTS
 export default Main;

@@ -1,5 +1,7 @@
+// REACT HOOKS IMPORTS
 import { ReactNode, createContext, useState } from "react";
 
+// React create context function
 const MainContext = createContext({
   score: 0,
   isStarted: false,
@@ -10,12 +12,13 @@ const MainContext = createContext({
   incrementScore: () => {},
   startActivity: () => {},
   endActivity: () => {},
-  resetScore: () => {},
-  setError: (msg: string) => {},
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  setError: (_error: { isError: boolean; msg: string }) => {},
   setLoading: () => {},
   /* eslint-enable @typescript-eslint/no-empty-function */
 });
 
+// Main context provider function to handle all global states
 export const MainContextProvider = (props: { children: ReactNode }) => {
   const [score, setScore] = useState(0);
   const [isStarted, setIsStarted] = useState(false);
@@ -70,4 +73,5 @@ export const MainContextProvider = (props: { children: ReactNode }) => {
   );
 };
 
+// EXPORTS STATEMENTS
 export default MainContext;

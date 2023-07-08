@@ -1,7 +1,13 @@
+// COMPONENTS IMPORTS
 import Logo from "@components/Logo/Logo";
 
+// CSS MODULES IMPORTS
 import classes from "./Header.module.css";
 
+/**
+ * This component is responsible for rendering the header section
+ * @component The header section component
+ */
 const Header = () => {
   return (
     <header className={classes["main-header"]}>
@@ -12,4 +18,5 @@ const Header = () => {
   );
 };
 
+// EXPORTS STATEMENTS
 export default Header;

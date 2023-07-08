@@ -1,11 +1,20 @@
+// REACT HOOKS IMPORTS
 import { useContext, useState, useEffect } from "react";
-import LoadingSpinner from "@components/LoadingSpinner/LoadingSpinner";
-import MainContext from "@store/MainContext";
-import { ENDPOINTS } from "@network/index";
-import Button from "@components/Button/Button";
 
+// COMPONENTS && CONTEXT IMPORTS
+import LoadingSpinner from "@components/LoadingSpinner/LoadingSpinner";
+import Button from "@components/Button/Button";
+import { ENDPOINTS } from "@network/index";
+import MainContext from "@store/MainContext";
+
+// CSS MODULES IMPORTS
 import classes from "./EndScreen.module.css";
 
+/**
+ * This component is responsible for rendering the end screen and post the score to the backend,
+ * then fetch the rank and renders it in addition to a restart button.
+ * @component The end screen component.
+ */
 const EndScreen = () => {
   const {
     score,
@@ -32,18 +41,21 @@ const EndScreen = () => {
             score: score,
           }),
         });
-
         const data = await res.json();
         SetRank(data.rank);
         setLoading();
       } catch (error: unknown) {
         if (error instanceof Error) {
           setLoading();
+          setError({
+            isError: true,
             msg: `An error occurred during fetching data! Please try again later! "${error}"`,
+          });
         }
       }
     };
     if (isEnded) postScore();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isEnded]);
 
   return (
@@ -71,4 +83,5 @@ const EndScreen = () => {
   );
 };
 
+// EXPORTS STATEMENTS
 export default EndScreen;
