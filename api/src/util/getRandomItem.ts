@@ -10,5 +10,5 @@ const getRandomItem = <T>(arr: T[]): T => {
   return arr[randomIndex];
 };
 
-//  EXPORTS STATMENTS
+//  EXPORTS STATEMENTS
 export default getRandomItem;

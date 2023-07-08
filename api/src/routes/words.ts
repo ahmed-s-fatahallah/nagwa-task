@@ -1,4 +1,4 @@
-//  DEPENDANCIES IMPORTS
+//  DEPENDENCIES IMPORTS
 import { Application, Request, Response } from "express";
 import shuffle from "lodash.shuffle";
 
@@ -8,7 +8,7 @@ import data from "./../assets/TestData.json";
 //  UTILITIES FUNCTIONS IMPORTS
 import getRandomItem from "../util/getRandomItem";
 
-//  Types defination
+//  Types definition
 type Pos = "noun" | "verb" | "adverb" | "adjective";
 interface Word {
   id: number;
@@ -68,5 +68,5 @@ const wordsRoutes = (app: Application) => {
   app.get("/words", generateRndWordsArry);
 };
 
-//  EXPORTS STATMENTS
+//  EXPORTS STATEMENTS
 export default wordsRoutes;

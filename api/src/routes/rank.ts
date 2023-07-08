@@ -1,4 +1,4 @@
-//  DEPENDANCIES IMPORTS
+//  DEPENDENCIES IMPORTS
 import { Application, Request, Response } from "express";
 
 //  DATA FILE IMPORT
@@ -13,7 +13,7 @@ const generateRank = (req: Request, res: Response) => {
   // get the score from the request body
   const score = req.body.score;
   // filter the scores list inside the data file and return the number of scores below the received score then
-  // divid it by the scores list length and muliplied by 100 to get the rank percentage
+  // divide it by the scores list length and multiplied by 100 to get the rank percentage
   const rank =
     (data.scoresList.filter((s) => s < score).length / data.scoresList.length) *
     100;
@@ -30,5 +30,5 @@ const rankRoutes = (app: Application) => {
   app.post("/rank", generateRank);
 };
 
-//  EXPORTS STATMENTS
+//  EXPORTS STATEMENTS
 export default rankRoutes;
