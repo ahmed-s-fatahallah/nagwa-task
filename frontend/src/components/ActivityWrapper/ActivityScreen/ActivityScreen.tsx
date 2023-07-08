@@ -2,7 +2,7 @@
 import { useContext, useEffect, useState } from "react";
 
 // COMPONENTS && CONTEXT IMPORTS
-import LoadingSpinner from "@components/LoadingSpinner/LoadingSpinner";
+import LoadingSpinner from "@components/loadingSpinner/LoadingSpinner";
 import Button from "@components/Button/Button";
 import { ENDPOINTS } from "@network/index";
 import MainContext from "@store/MainContext";
@@ -147,8 +147,8 @@ const ActivityScreen = () => {
               </ul>
 
               <div className={classes["prog-container"]}>
-                <div className={classes["score-container"]}>
-                  <p>Score</p>
+                <div className={classes["progress-container"]}>
+                  <p>Progress</p>
                   <span>{`${progBar + 10}%`}</span>
                 </div>
                 <div className={classes["prog-bar-container"]}>
