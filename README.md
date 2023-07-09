@@ -10,18 +10,19 @@ table of content:
 - [1. Startup Guides](#1-startup-guides)
   - [1.1. API Application Startup](#11-api-application-startup)
   - [1.2. Frontend Application Startup](#12-frontend-application-startup)
-- [2. How Does The Activity Work](#2-how-does-the-activity-work)
-- [3. Design Choices](#3-design-choices)
-- [4. Technologies Choices](#4-technologies-choices)
-  - [4.1. API Technologies](#41-api-technologies)
-  - [4.2. Frontend Technologies](#42-frontend-technologies)
-- [5. Approaches Explanations](#5-approaches-explanations)
-  - [5.1. Api Approaches](#51-api-approaches)
-  - [5.2. Frontend Approaches](#52-frontend-approaches)
-- [6. Folders Structures](#6-folders-structures)
-  - [6.1. Api Folder Structure](#61-api-folder-structure)
-  - [6.2. Frontend Folder Structure](#62-frontend-folder-structure)
-- [7. Additional Resources](#7-additional-resources)
+- [2. Run Unit Tests Guide](#2-run-unit-tests-guide)
+- [3. How Does The Activity Work](#3-how-does-the-activity-work)
+- [4. Design Choices](#4-design-choices)
+- [5. Technologies Choices](#5-technologies-choices)
+  - [5.1. API Technologies](#51-api-technologies)
+  - [5.2. Frontend Technologies](#52-frontend-technologies)
+- [6. Approaches Explanations](#6-approaches-explanations)
+  - [6.1. Api Approaches](#61-api-approaches)
+  - [6.2. Frontend Approaches](#62-frontend-approaches)
+- [7. Folders Structures](#7-folders-structures)
+  - [7.1. Api Folder Structure](#71-api-folder-structure)
+  - [7.2. Frontend Folder Structure](#72-frontend-folder-structure)
+- [8. Additional Resources](#8-additional-resources)
 
 ## 1. Startup Guides
 
@@ -112,7 +113,31 @@ table of content:
 
 > **Note**: make sure that the API development server is up and running in order for the frontend app to be fully functional. The frontend app expects that the API endpoint is <http://localhost:8080> if you started the API server on a different port kindly change the `API_ENDPOINT` constant in `frontend/src/network/index.ts`
 
-## 2. How Does The Activity Work
+## 2. Run Unit Tests Guide
+
+1. Make sure that the API server is up and running
+2. Navigate to the frontend root folder
+3. Write the following commands in the terminal to run tests
+
+   ```bash
+   npm run test
+   ```
+
+   or
+
+   ```bash
+   pnpm run test
+   ```
+
+   or
+
+   ```bash
+   yarn run test
+   ```
+
+4. You should see all the tests passed in the terminal
+
+## 3. How Does The Activity Work
 
 1. Click on Start Activity.
 2. You will see a Word and 4 buttons under it each button has a Part Of Speech (POS).
@@ -122,15 +147,15 @@ table of content:
 6. Keep repeating this until you reach 100% on the progress bar under the buttons.
 7. then after choosing the final word the screen will change with your Rank depending on your score and a restart button.
 
-## 3. Design Choices
+## 4. Design Choices
 
 - I imitated the Nagwa website design and I used Nagwa Logo, `color`s, `padding`s, `font-size`, `margin`s, `border`s, and `border-radius`.
 - The buttons shake and pulse animations and coloring are to give feedback to the user on his choices.
 - The design is responsive and compatible with all screens.
 
-## 4. Technologies Choices
+## 5. Technologies Choices
 
-### 4.1. API Technologies
+### 5.1. API Technologies
 
 - [**Express**](https://expressjs.com/): dependency to create the server because it's the most famous, quick and easy, simple to set up and personalize, also it allows you to define application routes using HTTP methods and URLs.
 - [**TypeScript**](https://www.typescriptlang.org/): to ensure types safety and to discover errors and bugs early during development and to improve development experience.
@@ -139,16 +164,17 @@ table of content:
 - [**nodemon**](https://www.npmjs.com/package/nodemon): to refresh the server automatically after any changes are done to the code during development.
 - [**lodash.shuffle**](https://lodash.com/): the shuffle method only from `lodash` library to use to shuffle the words array before sending it to the frontend.
 
-### 4.2. Frontend Technologies
+### 5.2. Frontend Technologies
 
 - [**React**](https://react.dev/): required by the task description, in addition to being the most famous JavaScript frontend framework.
 - [**TypeScript**](https://www.typescriptlang.org/): to ensure types safety and to discover errors and bugs early during development and to improve development experience.
 - [**vite**](https://vitejs.dev/): I chose to use **vite** as my bundler because it is way faster than Webpack which is the default bundler for React and provides a better development experience and easier configurations.
 - [**eslint**](https://eslint.org/): to make sure the code is well formatted and find and fix problems with your JavaScript code.
+- [**vitest**](https://vitest.dev/): used to write the unit tests for the frontend application.
 
-## 5. Approaches Explanations
+## 6. Approaches Explanations
 
-### 5.1. Api Approaches
+### 6.1. Api Approaches
 
 - Created and established the server and the index route inside the `server.ts` file using `express` and used `cors` and `body-parser` inside the root dir.
 - Created a `routes` folder to group different routes.
@@ -156,13 +182,13 @@ table of content:
 - Created a `util` folder to group all utility functions, inside of it there is a `getRandomItem.ts` file.
 - Created an assets folder to keep the JSON data file inside it.
 
-### 5.2. Frontend Approaches
+### 6.2. Frontend Approaches
 
 - first of all, I added import aliases to the vite.config.ts file and tsconfig.json to make import statements shorter and cleaner.
 
-## 6. Folders Structures
+## 7. Folders Structures
 
-### 6.1. Api Folder Structure
+### 7.1. Api Folder Structure
 
 ```bash
 📦src
@@ -176,7 +202,7 @@ table of content:
  ┗ 📜server.ts
 ```
 
-### 6.2. Frontend Folder Structure
+### 7.2. Frontend Folder Structure
 
 ```bash
 📦src
@@ -184,36 +210,51 @@ table of content:
  ┃ ┣ 📂activityWrapper
  ┃ ┃ ┣ 📂activityScreen
  ┃ ┃ ┃ ┣ 📜Activity.module.css
- ┃ ┃ ┃ ┗ 📜ActivityScreen.tsx
+ ┃ ┃ ┃ ┣ 📜ActivityScreen.tsx
+ ┃ ┃ ┃ ┗ 📜README.md
  ┃ ┃ ┣ 📂endScreen
  ┃ ┃ ┃ ┣ 📜EndScreen.module.css
- ┃ ┃ ┃ ┗ 📜EndScreen.tsx
+ ┃ ┃ ┃ ┣ 📜EndScreen.tsx
+ ┃ ┃ ┃ ┗ 📜README.md
  ┃ ┃ ┣ 📂startScreen
+ ┃ ┃ ┃ ┣ 📜README.md
  ┃ ┃ ┃ ┗ 📜StartScreen.tsx
  ┃ ┃ ┣ 📜ActivityWrapper.module.css
- ┃ ┃ ┗ 📜ActivityWrapper.tsx
- ┃ ┣ 📂Button
+ ┃ ┃ ┣ 📜ActivityWrapper.tsx
+ ┃ ┃ ┗ 📜README.md
+ ┃ ┣ 📂button
  ┃ ┃ ┣ 📜Button.module.css
- ┃ ┃ ┗ 📜Button.tsx
+ ┃ ┃ ┣ 📜Button.tsx
+ ┃ ┃ ┗ 📜README.md
  ┃ ┣ 📂footer
  ┃ ┃ ┣ 📜Footer.module.css
- ┃ ┃ ┗ 📜Footer.tsx
+ ┃ ┃ ┣ 📜Footer.tsx
+ ┃ ┃ ┗ 📜README.md
  ┃ ┣ 📂header
  ┃ ┃ ┣ 📜Header.module.css
- ┃ ┃ ┗ 📜Header.tsx
+ ┃ ┃ ┣ 📜Header.tsx
+ ┃ ┃ ┗ 📜README.md
  ┃ ┣ 📂loadingSpinner
  ┃ ┃ ┣ 📜LoadingSpinner.module.css
- ┃ ┃ ┗ 📜LoadingSpinner.tsx
+ ┃ ┃ ┣ 📜LoadingSpinner.tsx
+ ┃ ┃ ┗ 📜README.md
  ┃ ┣ 📂logo
  ┃ ┃ ┣ 📜Logo.module.css
- ┃ ┃ ┗ 📜Logo.tsx
+ ┃ ┃ ┣ 📜Logo.tsx
+ ┃ ┃ ┗ 📜README.md
  ┃ ┗ 📂main
  ┃ ┃ ┣ 📜Main.module.css
- ┃ ┃ ┗ 📜Main.tsx
+ ┃ ┃ ┣ 📜Main.tsx
+ ┃ ┃ ┗ 📜README.md
  ┣ 📂network
- ┃ ┗ 📜index.ts
+ ┃ ┣ 📜index.ts
+ ┃ ┗ 📜README.md
  ┣ 📂store
- ┃ ┗ 📜MainContext.tsx
+ ┃ ┣ 📜MainContext.tsx
+ ┃ ┗ 📜README.md
+ ┣ 📂tests
+ ┃ ┣ 📜ActivityScreen.test.jsx
+ ┃ ┗ 📜EndScreen.test.jsx
  ┣ 📜App.css
  ┣ 📜App.tsx
  ┣ 📜index.css
@@ -221,7 +262,7 @@ table of content:
  ┗ 📜vite-env.d.ts
 ```
 
-## 7. Additional Resources
+## 8. Additional Resources
 
 - [Nagwa website](https://www.nagwa.com/en/) used as a reference for the UI design and Logo.
 - [Stack overflow](https://stackoverflow.com/) used to search for bugs and problems that I faced during the development.
