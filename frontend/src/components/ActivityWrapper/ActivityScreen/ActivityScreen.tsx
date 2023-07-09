@@ -31,6 +31,7 @@ const ActivityScreen = () => {
   const [words, setWords] = useState<Word[]>([]);
   const [clickedPos, setClickedPos] = useState<Pos | null>(null);
   const [wordNum, setWordNum] = useState(0);
+  const [prog, setProg] = useState(0);
 
   const {
     endActivity,
@@ -85,14 +86,15 @@ const ActivityScreen = () => {
    */
   const onClickHandler = (pos: Pos) => {
     setClickedPos(pos);
+    setProg((prevState) => prevState + 1);
     if (words[wordNum]?.pos === pos) {
       // If the clicked button has the correct POS increment score
       incrementScore();
     }
   };
 
-  // Calculate the progress bar according to the received array length and the current showing element index;
-  const progBar = words.length && (wordNum / words.length) * 100;
+  // // Calculate the progress bar according to the received array length and the current showing element index;
+  const progBar = words.length && (prog / words.length) * 100;
 
   return (
     <>
@@ -149,12 +151,12 @@ const ActivityScreen = () => {
               <div className={classes["prog-container"]}>
                 <div className={classes["progress-container"]}>
                   <p>Progress</p>
-                  <span>{`${progBar + 10}%`}</span>
+                  <span>{`${progBar}%`}</span>
                 </div>
                 <div className={classes["prog-bar-container"]}>
                   <div
                     className={classes["prog-bar"]}
-                    style={{ width: `${progBar + 10}%` }}
+                    style={{ width: `${progBar}%` }}
                   ></div>
                 </div>
               </div>
