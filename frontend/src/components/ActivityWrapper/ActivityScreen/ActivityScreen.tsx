@@ -2,7 +2,7 @@
 import { useContext, useEffect, useState } from "react";
 
 // COMPONENTS && CONTEXT IMPORTS
-import LoadingSpinner from "@components/loadingSpinner/LoadingSpinner";
+import LoadingSpinner from "@components/LoadingSpinner/LoadingSpinner";
 import Button from "@components/button/Button";
 import { ENDPOINTS } from "@network/index";
 import MainContext from "@store/MainContext";
