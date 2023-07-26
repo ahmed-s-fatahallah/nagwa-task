@@ -1,5 +1,5 @@
 // COMPONENTS IMPORTS
-import ActivityWrapper from "@components/activityWrapper/ActivityWrapper";
+import ActivityWrapper from "@components/ActivityWrapper/ActivityWrapper";
 
 // CSS MODULES IMPORTS
 import classes from "./Main.module.css";

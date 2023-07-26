@@ -1,5 +1,5 @@
 // COMPONENTS IMPORTS
-import Logo from "@components/logo/Logo";
+import Logo from "@components/Logo/Logo";
 
 // CSS MODULES IMPORTS
 import classes from "./Footer.module.css";

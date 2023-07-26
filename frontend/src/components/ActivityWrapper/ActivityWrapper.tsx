@@ -2,9 +2,9 @@
 import { useContext } from "react";
 
 // COMPONENTS && CONTEXT IMPORTS
-import StartScreen from "./startScreen/StartScreen";
-import Activity from "./activityScreen/ActivityScreen";
-import EndScreen from "./endScreen/EndScreen";
+import StartScreen from "./StartScreen/StartScreen";
+import Activity from "./ActivityScreen/ActivityScreen";
+import EndScreen from "./EndScreen/EndScreen";
 import MainContext from "@store/MainContext";
 
 // CSS MODULES IMPORTS
