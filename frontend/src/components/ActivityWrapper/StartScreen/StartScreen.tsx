@@ -1,18 +1,21 @@
 // REACT HOOKS IMPORTS
-import { useContext } from "react";
-
+import { useDispatch } from "react-redux";
 // COMPONENTS && CONTEXT IMPORTS
 import Button from "@components/Button/Button";
-import MainContext from "@store/MainContext";
+import { startActivity } from "@store/mainSlice";
 
 /**
  * This component responsible for rendering the start activity screen
  * @component The start activity screen component
  */
 const StartScreen = () => {
-  const { startActivity } = useContext(MainContext);
+  const dispatch = useDispatch();
+  const StartHandler = () => {
+    dispatch(startActivity());
+  };
+
   return (
-    <Button variant="primary" onClick={startActivity}>
+    <Button variant="primary" onClick={StartHandler}>
       Start Activity
     </Button>
   );

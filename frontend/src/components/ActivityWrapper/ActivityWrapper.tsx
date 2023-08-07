@@ -1,11 +1,11 @@
 // REACT HOOKS IMPORTS
-import { useContext } from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "@store/Store";
 
 // COMPONENTS && CONTEXT IMPORTS
 import StartScreen from "./StartScreen/StartScreen";
 import Activity from "./ActivityScreen/ActivityScreen";
 import EndScreen from "./EndScreen/EndScreen";
-import MainContext from "@store/MainContext";
 
 // CSS MODULES IMPORTS
 import classes from "./ActivityWrapper.module.css";
@@ -15,10 +15,16 @@ import classes from "./ActivityWrapper.module.css";
  * @component The activity screens wrapper component
  */
 const ActivityWrapper = () => {
-  const { isStarted, isEnded } = useContext(MainContext);
+  const ctx = useSelector((state: RootState) => state.slice);
   return (
     <div className={classes["activity-container"]}>
-      {isStarted ? <Activity /> : isEnded ? <EndScreen /> : <StartScreen />}
+      {ctx.isStarted ? (
+        <Activity />
+      ) : ctx.isEnded ? (
+        <EndScreen />
+      ) : (
+        <StartScreen />
+      )}
     </div>
   );
 };

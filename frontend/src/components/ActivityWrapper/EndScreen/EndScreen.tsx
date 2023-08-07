@@ -1,14 +1,15 @@
 // REACT HOOKS IMPORTS
-import { useContext, useState, useEffect } from "react";
-
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 // COMPONENTS && CONTEXT IMPORTS
 import LoadingSpinner from "@components/LoadingSpinner/LoadingSpinner";
 import Button from "@components/Button/Button";
 import { ENDPOINTS } from "@network/index";
-import MainContext from "@store/MainContext";
 
 // CSS MODULES IMPORTS
 import classes from "./EndScreen.module.css";
+import { RootState } from "@store/Store";
+import { isLoading, setError, startActivity } from "@store/mainSlice";
 
 /**
  * This component is responsible for rendering the end screen and post the score to the backend,
@@ -18,18 +19,11 @@ import classes from "./EndScreen.module.css";
 const EndScreen = () => {
   const [rank, SetRank] = useState("");
 
-  const {
-    score,
-    isEnded,
-    isLoading,
-    error,
-    setLoading,
-    setError,
-    startActivity,
-  } = useContext(MainContext);
+  const ctx = useSelector((state: RootState) => state.slice);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    setLoading(true);
+    dispatch(isLoading(true));
     const postScore = async () => {
       try {
         const res = await fetch(ENDPOINTS.rank, {
@@ -39,37 +33,44 @@ const EndScreen = () => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            score: score,
+            score: ctx.score,
           }),
         });
         const data = await res.json();
         SetRank(data.rank);
-        setLoading(false);
+        dispatch(isLoading(false));
       } catch (error: unknown) {
         if (error instanceof Error) {
-          setLoading(false);
-          setError({
-            isError: true,
-            msg: `An error occurred during fetching data! Please try again later! "${error}"`,
-          });
+          dispatch(isLoading(false));
+
+          dispatch(
+            setError({
+              isError: true,
+              msg: `An error occurred during fetching data! Please try again later! "${error}"`,
+            })
+          );
         }
       }
     };
-    if (isEnded) postScore();
+    if (ctx.isEnded) postScore();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isEnded]);
+  }, [dispatch]);
+
+  const restartHandler = () => {
+    dispatch(startActivity());
+  };
 
   return (
     <>
-      {isLoading ? (
+      {ctx.isLoading ? (
         <LoadingSpinner />
       ) : (
         <>
-          {error.isError ? (
-            <p className="error">{error.msg}</p>
+          {ctx.error.isError ? (
+            <p className="error">{ctx.error.msg}</p>
           ) : (
             <>
-              <Button variant="primary" onClick={startActivity}>
+              <Button variant="primary" onClick={restartHandler}>
                 Try Again
               </Button>
               <div className={classes.rank}>

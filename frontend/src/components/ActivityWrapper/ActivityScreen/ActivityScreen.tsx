@@ -1,11 +1,14 @@
 // REACT HOOKS IMPORTS
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
 // COMPONENTS && CONTEXT IMPORTS
 import LoadingSpinner from "@components/LoadingSpinner/LoadingSpinner";
 import Button from "@components/Button/Button";
 import { ENDPOINTS } from "@network/index";
-import MainContext from "@store/MainContext";
+// import MainContext from "@store/MainContext";
+import { RootState } from "@store/Store";
+import { endActivity, increment, isLoading, setError } from "@store/mainSlice";
 
 // CSS MODULES IMPORTS
 import classes from "./Activity.module.css";
@@ -33,30 +36,26 @@ const ActivityScreen = () => {
   const [wordNum, setWordNum] = useState(0);
   const [prog, setProg] = useState(0);
 
-  const {
-    endActivity,
-    incrementScore,
-    setLoading,
-    setError,
-    isLoading,
-    error,
-  } = useContext(MainContext);
+  const ctx = useSelector((state: RootState) => state.slice);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    setLoading(true);
+    dispatch(isLoading(true));
     const fetchWords = async () => {
       try {
         const res = await fetch(ENDPOINTS.words);
         const data = await res.json();
         if (data) setWords(data);
-        setLoading(false);
+        dispatch(isLoading(false));
       } catch (error: unknown) {
         if (error instanceof Error) {
-          setLoading(false);
-          setError({
-            isError: true,
-            msg: `An error occurred during fetching data! Please try again later! "${error}"`,
-          });
+          dispatch(isLoading(false));
+          dispatch(
+            setError({
+              isError: true,
+              msg: `An error occurred during fetching data! Please try again later! "${error}"`,
+            })
+          );
         }
       }
     };
@@ -73,12 +72,12 @@ const ActivityScreen = () => {
         setWordNum((prev) => prev + 1);
         // Condition to check if the activity has ended
         if (wordNum === words.length - 1) {
-          endActivity();
+          dispatch(endActivity());
         }
       }, TIMEOUT_DURATION);
     }
     return () => clearTimeout(timeout);
-  }, [clickedPos, wordNum, words, endActivity]);
+  }, [clickedPos, wordNum, words, dispatch]);
 
   /**
    * This function takes the current clicked button POS and check if it's equal to the current word POS.
@@ -89,7 +88,7 @@ const ActivityScreen = () => {
     setProg((prevState) => prevState + 1);
     if (words[wordNum]?.pos === pos) {
       // If the clicked button has the correct POS increment score
-      incrementScore();
+      dispatch(increment());
     }
   };
 
@@ -98,12 +97,12 @@ const ActivityScreen = () => {
 
   return (
     <>
-      {isLoading ? (
+      {ctx.isLoading ? (
         <LoadingSpinner />
       ) : (
         <>
-          {error.isError ? (
-            <p className="error">{error.msg}</p>
+          {ctx.error.isError ? (
+            <p className="error">{ctx.error.msg}</p>
           ) : (
             <>
               <p

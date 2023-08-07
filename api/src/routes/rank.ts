@@ -19,6 +19,7 @@ const generateRank = (req: Request, res: Response) => {
     100;
 
   // response with the rank % rounded to the nearest hundredth as a string
+  console.log(rank);
   res.send({ rank: `${+rank.toFixed(2)}%` });
 };
 
